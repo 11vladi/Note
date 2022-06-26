@@ -1,0 +1,393 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+    <div class="container-fluid"> 
+        <div class="row row-cols-2">
+            <div class="col-3" >
+                <div class="row align-items-start" style="background-color: #b9963c;">     
+                    <div class="input-group mb-3">
+                        <button type="button" class="btn" title="New note" width="32" height="32" onclick = "newNote()" >
+                            <img src="/static/note/img/arrow-bar-down.svg" alt="Bootstrap" width="32" height="32">
+                        </button>               
+                        <button type="button" class="btn" title="New child note" width="32" height="32"  onclick = "newNoteIn()" >
+                            <img src="/static/note/img/arrow-bar-right.svg" alt="Bootstrap" width="32" height="32">
+                        </button> 
+                        <input type="text" id="searh_input" class="form-control" placeholder="Searh">
+                        <button type="button" class="btn" title="Rename note" width="32" height="32" onclick = "renameNode()" >
+                            <img src="/static/note/img/edit.png" alt="Bootstrap" width="32" height="32" >
+                        </button>               
+                        <button type="button" class="btn" title="Delete note" width="32" height="32"  onclick = "deleteNode()" >
+                            <img src="/static/note/img/del.png" alt="Bootstrap" width="32" height="32">
+                        </button>
+                    </div>
+                      
+                    
+
+                </div>
+                <div class="row align-items-start">
+                    <div class="col" id="jstree">
+                        
+                    </div>            
+                </div>
+            </div>
+            <div class="col-9">
+                <div class="row "  style="background-color: #b9963c;">
+                    <div class="input-group mb-3  justify-content-md-end">
+                        <button  id="btnEdit" type="button" class="btn" title="Edit" width="32" height="32" onclick = "enableEdit()" >
+                            <img src="/static/note/img/edit_note.png" alt="Bootstrap" width="32" height="32"  fill="currentColor">
+                        </button>               
+                        <button id="btnSave" type="button" class="btn" title="Save" width="32" height="32"  onclick = "saveNote()"  disabled>
+                            <img id="imgSave" src="/static/note/img/save.png" alt="Bootstrap" width="32" height="32">
+                        </button>                        
+                    </div>
+
+
+                </div> 
+                <div class="row">
+                        <div class="col" id="ntext-div">
+                            <textarea class="tinymce" name="" id="note_text" rows="30" ></textarea>
+                        </div>            
+                </div>          
+            </div>
+        </div>
+        
+    </div>
+{% endblock content %}
+
+
+{% block javascript %}
+   
+<script  type="text/javascript">
+     tinymce.init({
+            selector: "#note_text",
+            language: "{{LANGUAGE_CODE}}",
+            toolbar_sticky: true,
+            base_url: "{% static 'js/tiny_mce' %}", 
+            plugins: [
+                "advlist autolink lists link image charmap print preview anchor",
+                "searchreplace visualblocks code fullscreen",
+                "insertdatetime media table paste"
+            ],
+
+            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+        });
+</script>
+    
+    {% autoescape off %}
+        {{tree_data}}
+    {% endautoescape %}
+    
+
+
+    <script type="text/javascript">
+        
+
+	   
+        $('#jstree').on("changed.jstree", function (e, data) {        
+                if(data.changed.selected.length) {
+                    loadNote(data.node.id);   
+                          
+                }
+               
+                if (data.changed.deselected.length&&(!tinymce.get("note_text").mode.isReadOnly())){
+                     saveNoteText(data.changed.deselected[0]);
+                }
+        });      
+
+        
+
+
+        $('#jstree').on("rename_node.jstree", function (e, data) {  
+
+           if (data.old!=data.text){
+                let send_data = {
+                    id: data.node.id,
+                    name:data.text
+                };
+
+                var request = new Request('{% url "rename-note" %}', {
+                    method: 'POST',
+                    body:  JSON.stringify(send_data),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{ csrf_token }}'
+                    }
+                });
+
+                fetch(request)
+                    .then(response => response.json())
+                    .then(function(data) {
+                        if (data){
+                            if (data.result!='OK'){
+                                data.text=data.old
+                                alert('error')
+                            }
+
+                        } else {
+                            data.text=data.old
+                            alert('error')
+                        }
+                    })
+                    .catch(function(error) {
+                        data.text=data.old
+                        alert(error);
+                    })
+                }        
+
+        }); 
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+            var to = false;
+            $("#searh_input").keyup(function(){
+                
+                if(to){
+                    clearTimeout(to);
+                }
+                to = setTimeout(function(){
+                    $('#jstree').jstree(true).search($('#searh_input').val()); 
+                },250);
+            });
+        });
+    </script>
+
+
+    <script type="text/javascript">
+        function deleteNode(){
+            var ref = $("#jstree").jstree(true);
+            var sel = ref.get_selected();
+            if(sel.length){
+                var inst = $.jstree.reference(sel[0]);
+                 obj = inst.get_node(sel[0]);
+                 inst.open_all(obj) ;
+                 var delem=[];
+                 delem[0]=sel[0];
+                 var elements = $('#'+sel[0].toString()).find('li').each(function(index, elem) {
+                       delem[delem.length]=elem.id; 
+                  }).length;
+
+                  let send_data = {
+                        id: delem
+                    };
+                
+                    var request = new Request('{% url "delete-notes" %}', {
+                        method: 'POST',
+                        body:  JSON.stringify(send_data),
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRFToken': '{{ csrf_token }}'
+                        }
+                    });
+
+                    fetch(request)
+                        .then(response => response.json())
+                        .then(function(data) {
+                            if (data){
+                                document.location.href="{% url 'my-notes' %}";
+                                
+                            } else {
+                                alert('error')
+                            }
+                    })
+                    .catch(function(error) {
+                        alert(error);
+                    })
+            }
+        }
+
+
+        function renameNode(){
+            var ref = $("#jstree").jstree(true);
+            var sel = ref.get_selected();
+            if(sel.length){
+                var inst = $.jstree.reference(sel[0]);
+                 obj = inst.get_node(sel[0]);
+                 inst.edit(obj); 
+              }
+        }
+        function newNote() {
+
+            var ref = $("#jstree").jstree(true);
+            var sel = ref.get_selected();
+            if(sel.length){
+                var inst = $.jstree.reference(sel[0]);
+                 obj = inst.get_node(sel[0]);
+                node_create(obj.parent);
+              }
+              else{
+                node_create('#');
+              }
+        }
+
+        function newNoteIn() {
+            
+            var ref = $("#jstree").jstree(true);
+            var sel = ref.get_selected();
+            if(sel.length){
+                node_create(sel[0]);
+              }         						
+        }
+
+        function node_create(par){ 
+
+            let send_data = {
+                parent: par,
+                name:'**new**'
+            };
+
+            var request = new Request('{% url "new-note" %}', {
+                method: 'POST',
+                body:  JSON.stringify(send_data),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                }
+            });
+
+            fetch(request)
+                .then(response => response.json())
+                .then(function(data) {
+                    if (data){
+                        
+                        var nw=$('#jstree').jstree().create_node(data.parent,{ "id":data.id,"text":data.name} , "last", null, true);
+                        if (nw){
+                            $('#jstree').jstree().deselect_all();
+                            var inst = $.jstree.reference(nw);
+                            obj = inst.get_node(nw);
+
+                            var pinst = $.jstree.reference(data.parent);
+                            pobj = pinst.get_node(data.parent);
+                            pinst.open_all(pobj);
+                            $('#jstree').jstree().select_node(obj,true,true);
+                             document.location.href="{% url 'my-notes' %}";                            
+                        }
+
+                    } else {
+                        alert('error')
+                    }
+            })
+            .catch(function(error) {
+                alert(error);
+            })
+            
+        }
+    </script>
+    <script>
+  
+
+        function showLoadingError(){
+            buttonFirstState();
+            alert('loading error');
+        }
+
+        function enableEdit(){
+             if (tinymce.get("note_text").mode.isReadOnly()){
+                tinymce.get("note_text").mode.set('design');
+            }
+            $("#btnSave").removeAttr('disabled');
+            $("#btnEdit").attr('disabled','disabled'); 
+        }
+        function buttonFirstState(){
+            if (!tinymce.get("note_text").mode.isReadOnly()){
+               tinymce.get("note_text").mode.set('readonly');
+            } 
+            $("#btnSave").attr('disabled','disabled');
+            $("#btnEdit").removeAttr('disabled'); 
+        }
+
+        function saveNoteText(noteId){
+                let send_data = {
+                    id: noteId,
+                    text: tinymce.get("note_text").getContent()
+                };
+
+                var request = new Request('{% url "text-save" %}', {
+                    method: 'POST',
+                    body:  JSON.stringify(send_data),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{ csrf_token }}'
+                    }
+                    });
+                
+                    fetch(request)
+                    .then(response => response.json())
+                    .then(function(data) {
+                        if (data){
+                            if (data.result!="OK"){
+                                alert('save error');
+                            } 
+                        } else {                               
+                            alert('save error');
+                        }
+                    })
+                    .catch(function(error) {
+                        alert('save error');
+                    })
+
+                    buttonFirstState();  
+        }
+
+        function saveNote(){
+            var ref = $("#jstree").jstree(true);
+            var sel = ref.get_selected();
+            if(sel.length){
+                saveNoteText(sel[0]);                             
+          }
+        }
+
+        function loadNote(noteId){
+            
+            let send_data = {
+                id: noteId
+                };
+            
+                var request = new Request('{% url "text-loading" %}', {
+                method: 'POST',
+                body:  JSON.stringify(send_data),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                }
+                });
+
+                fetch(request)
+                .then(response => response.json())
+                .then(function(data) {
+                    
+                    if (data){
+
+                        if (data.id!=send_data.id){
+                            showLoadingError();
+                        } else {
+                            tinymce.get("note_text").setContent(data.text);
+                            buttonFirstState();
+                            
+                        }
+
+                    } else {
+                        showLoadingError();
+                    }
+                })
+                .catch(function(error) {
+                    showLoadingError();
+                })
+
+        }
+    </script>
+    
+    <script>
+        $(window).on('load', function(){
+            
+            var ref = $("#jstree").jstree(true);
+            var sel = ref.get_selected();
+            if(sel.length){
+                loadNote( sel[0]);
+            }
+        });
+    </script>
+
+
+    
+{% endblock javascript %}

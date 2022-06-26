@@ -1,0 +1,85 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+<head>    
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Notes{% endblock title %}</title>
+    <link rel="stylesheet" href="{% static 'note/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'note/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'note/css/themes/default/style.min.css'%}" />
+    <script src="{% static 'admin/js/vendor/jquery/jquery.min.js' %}" ></script>
+    <script src="{% static 'note/js/bootstrap.bundle.min.js' %}" ></script>
+    <script type="text/javascript" src="{% static 'note/js/jstree.min.js' %}" ></script>
+    <script type="text/javascript" src="{% static 'js/tiny_mce/tinymce.min.js' %}"></script>
+    {{ form.media }}
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #665939;">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav">{% block navigation %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">{% trans 'Home' %}</a></li>      
+                        {% if user.is_authenticated %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'my-notes' %}">{% trans 'My notes' %}</a></li> 
+                        {% endif %}
+                    {% endblock navigation %}</ul>
+
+                    <ul class="navbar-nav ml-auto">
+                        {% if user.is_authenticated %}
+                          <li class="nav-item"><a class="nav-link" href="{% url 'view_profile' %}">
+                            <svg class="bi bi-person" width="1.5em" height="1.5em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                              <path fill-rule="evenodd" d="M13 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM3.022 13h9.956a.274.274 0 00.014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 00.022.004zm9.974.056v-.002.002zM8 7a2 2 0 100-4 2 2 0 000 4zm3-2a3 3 0 11-6 0 3 3 0 016 0z" clip-rule="evenodd"/>
+                            </svg>
+                          {{ user.get_username }}</a></li>
+   
+                          <li class="nav-item"><a class="nav-link" href="{% url 'logout'%}">{% trans 'Disconnect' %}</a></li>
+                        {% else %}
+                          <li class="nav-item"><a class="nav-link" href="{% url 'login'%}?next={{request.path}}">{% trans 'Log in' %}</a></li>
+                          <li class="nav-item"><a class="nav-link" href="{% url 'register'%}">{% trans 'Sign up' %}</a></li>
+                        {% endif %}
+                      </ul>
+
+                      
+
+                      <form action="{% url 'set_language' %}" method="post">
+                        {% csrf_token %}
+                        <input name="next" type="hidden" value="{{ redirect_to }}"/>
+                        <select name="language" onchange="this.form.submit()">
+                          {% load static %}
+                          {% get_current_language as LANGUAGE_CODE %}
+                          {% get_available_languages as LANGUAGES %}
+                          {% for lang in LANGUAGES %}
+                          <option  value="{{ lang.0 }}" {% if lang.0 == LANGUAGE_CODE %} selected="selected" {% endif %}>
+                            {{ lang.1 }}
+                          </option>
+                          {% endfor %}
+                        </select>
+                      </form>
+
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        {% block messages %}
+        <div class="container-fluid">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+        </div>
+        {% endblock messages %}
+        {% block content %}{% endblock content %}
+    </main>
+    {%  block javascript %}{% endblock javascript %}
+</body>
+</html>

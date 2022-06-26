@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+<div class="container">
+    <h1>{% trans 'Login' %}</h1>
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+
+        {% if form.errors %}
+            <div class="alert alert-danger">{% trans 'Login Error: Please try again.' %}</div>
+        {% endif %}
+
+        {% if next and request.user.is_authenticated %}
+            <div class="alert alert-warning">{% trans 'You will not be able to access the page you have entered. Please login.' %}</div>
+        {% endif %}
+
+        <div class="form-group">
+            <label for="id_username">{% trans 'User name:' %}</label><br>
+            {{ form.username }}
+        </div>
+        <div class="form-group">
+            <label for="id_password">{% trans 'password' %}</label><br>
+            {{ form.password }}
+        </div>
+        <div class="form-group">
+            <input type="submit" value="prisijungti" class="btn btn-primary">
+            <input type="hidden" name="next" value="{{ next }}">
+        </div>
+    </form>
+
+    <P><a href="{% url 'password_reset' %}">{% trans 'forgot your password?' %}</a></p>
+    
+</div>
+{% endblock content %}

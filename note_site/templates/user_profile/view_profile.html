@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static i18n %}
+{% block content %}
+<div class="container">
+    <div class="content-section">
+        <div class="media">
+            {% if user_.profile.picture %}
+                <img class="img-fluid account-img rounded-circle mr-2" style="max-width: 300px;" src="{{ user_.profile.picture.url }}">
+            {% else %}
+                <img class="img-fluid account-img rounded-circle mr-2" style="max-width: 300px;" src="{% static 'user_profile/img/default.png' %}">
+            {% endif %}
+            <div class="media-body">
+                <h2 class="account-heading">{{ user_.username }}</h2>
+                <h3 class="account-heading">{{ user_.first_name }} {{ user_.last_name }}</h3>
+                {% if user_ == request.user %}
+                    <p class="text-secondary">{{ user_.email }}</p>
+                    <a class="btn btn-secondary" href="{% url 'edit_profile' %}">{% trans "update profile"|capfirst %}</a><hr>
+                {% endif %}
+                
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block title %}{% trans "profile"|capfirst %} | {{ block.super }}{% endblock title %}

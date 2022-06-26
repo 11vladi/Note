@@ -1,0 +1,236 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-06-21 21:00+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n % 10 == 1 && (n % 100 > 19 || n % 100 < "
+"11) ? 0 : (n % 10 >= 2 && n % 10 <=9) && (n % 100 > 19 || n % 100 < 11) ? "
+"1 : n % 1 != 0 ? 2: 3);\n"
+
+#: .\templates\base.html:27
+msgid "Home"
+msgstr "Pradžia"
+
+#: .\templates\base.html:29
+msgid "My notes"
+msgstr "Mano užrašai"
+
+#: .\templates\base.html:41
+msgid "Disconnect"
+msgstr "Atsijungti"
+
+#: .\templates\base.html:43
+msgid "Log in"
+msgstr "Prisijungti"
+
+#: .\templates\base.html:44
+#, fuzzy
+#| msgid "sign up"
+msgid "Sign up"
+msgstr "Registruotis"
+
+#: .\templates\registration\logged_out.html:5
+msgid "Goodbye!"
+msgstr "Viso gero!"
+
+#: .\templates\registration\logged_out.html:6
+msgid "Signed out successfully."
+msgstr "Sėkmingai atsijungta."
+
+#: .\templates\registration\logged_out.html:6
+#: .\templates\registration\password_reset_complete.html:6
+msgid "Please log in again"
+msgstr "Prašome prisijungti dar kartą"
+
+#: .\templates\registration\login.html:5
+#, fuzzy
+#| msgid "login"
+msgid "Login"
+msgstr "Prisijungti"
+
+#: .\templates\registration\login.html:10
+msgid "Login Error: Please try again."
+msgstr "Prisijungimo klaida: bandykite dar kartą."
+
+#: .\templates\registration\login.html:14
+msgid "You will not be able to access the page you have entered. Please login."
+msgstr "Negalėsite pasiekti įvesto puslapio. Prašome prisijungti."
+
+#: .\templates\registration\login.html:18
+#, fuzzy
+#| msgid "username"
+msgid "User name:"
+msgstr "Vartotojo vardas"
+
+#: .\templates\registration\login.html:22
+#: .\templates\user_profile\register.html:19
+msgid "password"
+msgstr "Slaptažodis"
+
+#: .\templates\registration\login.html:31
+#, fuzzy
+#| msgid "repeat password"
+msgid "forgot your password?"
+msgstr "Pakartokite slaptažodį"
+
+#: .\templates\registration\password_reset_complete.html:5
+msgid "Password changed"
+msgstr "Slaptažodis pakeistas"
+
+#: .\templates\registration\password_reset_confirm.html:5
+msgid "Password changing"
+msgstr "Slaptažodžio keitimas"
+
+#: .\templates\registration\password_reset_confirm.html:15
+#, fuzzy
+#| msgid "password"
+msgid "New password:"
+msgstr "Slaptažodis"
+
+#: .\templates\registration\password_reset_confirm.html:24
+msgid "Please confirm again:"
+msgstr "Patvirtinkite dar kartą:"
+
+#: .\templates\registration\password_reset_confirm.html:33
+msgid "Password reset link is invalid. Please"
+msgstr "Slaptažodžio nustatymo iš naujo nuoroda neteisinga. Prašau"
+
+#: .\templates\registration\password_reset_confirm.html:33
+#, fuzzy
+#| msgid "repeat password"
+msgid "reset password change"
+msgstr "Pakartokite slaptažodį"
+
+#: .\templates\registration\password_reset_done.html:4
+msgid "Check your email"
+msgstr "Patikrink savo paštą"
+
+#: .\templates\registration\password_reset_done.html:5
+msgid ""
+"Sent you an email with a link that will allow you to change your password."
+msgstr "Išsiuntėme el. laišką su nuoroda, kuri leis pasikeisti slaptažodį."
+
+#: .\templates\registration\password_reset_email.html:1
+msgid ""
+"Someone sent us a password reset request. If this was you, follow the link "
+"below:"
+msgstr ""
+"Kažkas atsiuntė mums slaptažodžio nustatymo iš naujo užklausą. Jei tai "
+"buvote jūs, spustelėkite toliau pateiktą nuorodą:"
+
+#: .\templates\registration\password_reset_form.html:4
+msgid "Forgotten password recovery"
+msgstr "Pamiršto slaptažodžio atkūrimas"
+
+#: .\templates\registration\password_reset_form.html:13
+#, fuzzy
+#| msgid "e-mail"
+msgid "E-mail:"
+msgstr "E-paštas"
+
+#: .\templates\user_profile\edit_profile.html:5
+msgid "updating user"
+msgstr "vartuotojo atnaujinamas"
+
+#: .\templates\user_profile\edit_profile.html:5
+#: .\templates\user_profile\view_profile.html:26 .\users\models.py:11
+msgid "profile"
+msgstr "profilis"
+
+#: .\templates\user_profile\edit_profile.html:13
+msgid "update"
+msgstr "atnaujinimas"
+
+#: .\templates\user_profile\edit_profile.html:19
+#: .\templates\user_profile\view_profile.html:17
+msgid "update profile"
+msgstr "profilio atnaujinimas"
+
+#: .\templates\user_profile\register.html:5
+#: .\templates\user_profile\register.html:27
+#: .\templates\user_profile\register.html:33
+msgid "sign up"
+msgstr "registruotis"
+
+#: .\templates\user_profile\register.html:9
+msgid "username"
+msgstr "Vartotojo vardas"
+
+#: .\templates\user_profile\register.html:11
+msgid "up to 150 characters"
+msgstr "iki 150 simbolių"
+
+#: .\templates\user_profile\register.html:14
+msgid "e-mail"
+msgstr "e-paštas"
+
+#: .\templates\user_profile\register.html:16
+msgid "to be used for password reset purpose only"
+msgstr "naudoti tik slaptažodžio nustatymo iš naujo tikslais"
+
+#: .\templates\user_profile\register.html:21
+msgid ""
+"not less than 8 symbols, must be alphanumeric with both upper and lower case "
+"letters"
+msgstr ""
+"ne mažiau kaip 8 simboliai, turi būti raidiniai ir skaitmeniniai su "
+"didžiosiomis ir mažosiomis raidėmislaiškus"
+
+#: .\templates\user_profile\register.html:24
+msgid "repeat password"
+msgstr "Pakartokite slaptažodį"
+
+#: .\templates\user_profile\register.html:29
+msgid "already registered"
+msgstr "jau užregistruotas"
+
+#: .\templates\user_profile\register.html:29
+msgid "login"
+msgstr "Prisijungti"
+
+#: .\users\models.py:12
+msgid "user"
+msgstr "Vartotojas"
+
+#: .\users\models.py:14
+msgid "picture"
+msgstr "nuotrauka"
+
+#: .\users\views.py:23
+msgid "Passwords do not match or have not been entered."
+msgstr "Slaptažodžiai nesutampa arba neįvesti."
+
+#: .\users\views.py:26
+#, fuzzy, python-brace-format
+#| msgid "User {username} already exists or is not entered."
+msgid "User {username} already exists or not entered."
+msgstr "Vartotojas {username} jau egzistuoja arba neįvestas."
+
+#: .\users\views.py:29
+#, fuzzy, python-brace-format
+#| msgid "User with email {email} already exists or is not entered."
+msgid "User with email {email} already exists or not entered."
+msgstr "Vartotojas su el.raštu {email} jau egzistuoja arba neįvestas."
+
+#: .\users\views.py:35
+#, fuzzy, python-brace-format
+#| msgid "User {username} has been successfully registered. You can log in"
+msgid "User {username} registered successfully. You can log in"
+msgstr "Vartotojas {username} užregistruotas sėkmingai. Galite prisijungti"
+
+#: .\users\views.py:54
+msgid "User {} profile was updated"
+msgstr "Naudotojo {} profilis buvo atnaujintas"

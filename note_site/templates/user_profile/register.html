@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+    <div class="container py-3">
+        <h1>{% trans 'sign up'|capfirst %}</h1>
+        <form method="post" action="">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username">{% trans 'username'|capfirst %}:</label>
+                <input name="username" type="text" class="form-control" id="username" aria-describedby="usernameHelp" value="{{ username }}">
+                <small id="usernameHelp" class="form-text text-muted">{% trans 'up to 150 characters'|capfirst %}.</small>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">{% trans "e-mail"|capfirst %}:</label>
+                <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ email }}">
+                <small id="emailHelp" class="form-text text-muted">{% trans 'to be used for password reset purpose only' %}. </small>
+            </div>
+            <div class="form-group">
+                <label for="password">{% trans "password"|capfirst %}:</label>
+                <input name="password" type="password" class="form-control" id="password" aria-describedby="pwdHelp">
+                <small id="pwdHelp" class="form-text text-muted">{% trans 'not less than 8 symbols, must be alphanumeric with both upper and lower case letters'|capfirst %}.</small>
+            </div>
+            <div class="form-group">
+                <label for="password2">{% trans "repeat password"|capfirst %}:</label>
+                <input name="password2" type="password" class="form-control" id="password2" aria-describedby="pwd2Help">
+            </div>
+            <button type="submit" class="btn btn-primary register-button">{% trans "sign up"|capfirst %}</button>
+        </form>
+        <p>{% trans "already registered"|capfirst %}? <a href="{% url 'login' %}"><strong>{% trans "login" %}</strong></a>.</p>
+    </div>
+{% endblock content %}
+
+{% block title %}{% trans "sign up"|capfirst %} | {{ block.super }}{% endblock title %}

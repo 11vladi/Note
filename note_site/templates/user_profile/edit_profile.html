@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags i18n %}
+{% block content %}
+<div class="container">
+    <h1>{% trans 'updating user'|capfirst %} {{ user }} {% trans "profile" %}</h1>
+    <form method="post" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset class="form-group">
+          {{ u_form | crispy }} 
+          {{ p_form | crispy }} 
+        </fieldset>
+        <fieldset>
+            <button class="btn btn-primary" type="submit">{% trans "update"|capfirst %}</button>
+        </fieldset>
+    </form>
+</div>
+{% endblock content %}
+
+{% block title %}{% trans "update profile"|capfirst %} | {{ block.super }}{% endblock title %}

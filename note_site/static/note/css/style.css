@@ -1,0 +1,6 @@
+h1 {color: #00ff00; }
+body {background-color: rgb(214, 182, 122);}
+main .container {background-color: rgba(245, 255, 255, 0.7); padding: 1rem 1rem;}
+.navbar-dark {background-color: rgba(0, 0, 0, 0.85);}
+.form-control {border: 0px!important; border-radius: 10px!important;}
+
