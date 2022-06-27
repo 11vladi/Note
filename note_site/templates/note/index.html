@@ -2,8 +2,10 @@
 {% load static %}
 {% load i18n %}
 {% block content %}
-    <b>Draugas!</b>
-    <p>Čia gali rašyti visokias nesąmones ir niekas kitas neskaitys. Bet tik po registracijos</p>
-    <img src="{% static 'img/best-brain-boosters.jpg' %}" height="650">
+    <div>
+    <b>{% trans 'Friend!' %} </b>
+    <p>{% trans 'You can write all kinds of nonsense here and no one else will read it. But only after registration' %}</p>
+    <img src="{% static 'img/laptop-2838921_1280.jpg' %}" align="center" max-width: 100% height: auto>
+    </div>
 {% endblock content %}
 

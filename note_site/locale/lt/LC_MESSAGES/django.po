@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-21 21:00+0300\n"
+"POT-Creation-Date: 2022-06-26 21:19+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,27 +20,65 @@ msgstr ""
 "11) ? 0 : (n % 10 >= 2 && n % 10 <=9) && (n % 100 > 19 || n % 100 < 11) ? "
 "1 : n % 1 != 0 ? 2: 3);\n"
 
-#: .\templates\base.html:27
+#: .\templates\base.html:29
 msgid "Home"
 msgstr "Pradžia"
 
-#: .\templates\base.html:29
+#: .\templates\base.html:31
 msgid "My notes"
 msgstr "Mano užrašai"
 
-#: .\templates\base.html:41
+#: .\templates\base.html:43
 msgid "Disconnect"
 msgstr "Atsijungti"
 
-#: .\templates\base.html:43
+#: .\templates\base.html:45
 msgid "Log in"
 msgstr "Prisijungti"
 
-#: .\templates\base.html:44
-#, fuzzy
-#| msgid "sign up"
-msgid "Sign up"
+#: .\templates\base.html:46 .\templates\user_profile\register.html:5
+#: .\templates\user_profile\register.html:27
+#: .\templates\user_profile\register.html:33
+msgid "sign up"
 msgstr "Registruotis"
+
+#: .\templates\note\index.html:5
+msgid "Friend!"
+msgstr "Draugas!"
+
+#: .\templates\note\index.html:6
+msgid ""
+"You can write all kinds of nonsense here and no one else will read it. But "
+"only after registration"
+msgstr ""
+"Galima čia visokias nesąmones rašyti ir niekas kitas neskaitys. bet tik po "
+"registracijos"
+
+#: .\templates\note\notes.html:10
+#, fuzzy
+#| msgid "My notes"
+msgid "New note"
+msgstr "Mano užrašai"
+
+#: .\templates\note\notes.html:13
+msgid "New child note"
+msgstr "Naujas vaiko užrašas"
+
+#: .\templates\note\notes.html:17
+msgid "Rename note"
+msgstr "Pervardyti pastabą"
+
+#: .\templates\note\notes.html:20
+msgid "Delete note"
+msgstr "Ištrinti pastabą"
+
+#: .\templates\note\notes.html:37
+msgid "Edit"
+msgstr "Redaguoti"
+
+#: .\templates\note\notes.html:40
+msgid "Save"
+msgstr "Išsaugoti"
 
 #: .\templates\registration\logged_out.html:5
 msgid "Goodbye!"
@@ -146,7 +184,7 @@ msgid "updating user"
 msgstr "vartuotojo atnaujinamas"
 
 #: .\templates\user_profile\edit_profile.html:5
-#: .\templates\user_profile\view_profile.html:26 .\users\models.py:11
+#: .\templates\user_profile\view_profile.html:26
 msgid "profile"
 msgstr "profilis"
 
@@ -158,12 +196,6 @@ msgstr "atnaujinimas"
 #: .\templates\user_profile\view_profile.html:17
 msgid "update profile"
 msgstr "profilio atnaujinimas"
-
-#: .\templates\user_profile\register.html:5
-#: .\templates\user_profile\register.html:27
-#: .\templates\user_profile\register.html:33
-msgid "sign up"
-msgstr "registruotis"
 
 #: .\templates\user_profile\register.html:9
 msgid "username"
@@ -201,11 +233,11 @@ msgstr "jau užregistruotas"
 msgid "login"
 msgstr "Prisijungti"
 
-#: .\users\models.py:12
+#: .\users\models.py:11
 msgid "user"
 msgstr "Vartotojas"
 
-#: .\users\models.py:14
+#: .\users\models.py:13
 msgid "picture"
 msgstr "nuotrauka"
 
@@ -234,3 +266,8 @@ msgstr "Vartotojas {username} užregistruotas sėkmingai. Galite prisijungti"
 #: .\users\views.py:54
 msgid "User {} profile was updated"
 msgstr "Naudotojo {} profilis buvo atnaujintas"
+
+#, fuzzy
+#~| msgid "sign up"
+#~ msgid "Sign up"
+#~ msgstr "Registruotis"

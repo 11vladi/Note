@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-21 21:00+0300\n"
+"POT-Creation-Date: 2022-06-26 21:19+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,14 +20,14 @@ msgstr ""
 "11) ? 0 : (n % 10 >= 2 && n % 10 <=9) && (n % 100 > 19 || n % 100 < 11) ? "
 "1 : n % 1 != 0 ? 2: 3);\n"
 
-#: .\note\models.py:11
+#: .\note\models.py:12
 msgid "Name"
 msgstr "Vardas"
 
-#: .\note_site\settings.py:107
+#: .\note_site\settings.py:116
 msgid "English"
 msgstr "Anglų"
 
-#: .\note_site\settings.py:108
+#: .\note_site\settings.py:117
 msgid "Lithuanian"
 msgstr "Lietuvų"

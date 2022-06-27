@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% block content %}
 {% load static %}
     <div class="container-fluid"> 
@@ -6,17 +7,17 @@
             <div class="col-3" >
                 <div class="row align-items-start" style="background-color: #b9963c;">     
                     <div class="input-group mb-3">
-                        <button type="button" class="btn" title="New note" width="32" height="32" onclick = "newNote()" >
+                        <button type="button" class="btn" title="{% trans 'New note' %}" width="32" height="32" onclick = "newNote()" >
                             <img src="/static/note/img/arrow-bar-down.svg" alt="Bootstrap" width="32" height="32">
                         </button>               
-                        <button type="button" class="btn" title="New child note" width="32" height="32"  onclick = "newNoteIn()" >
+                        <button type="button" class="btn" title="{% trans 'New child note' %}" width="32" height="32"  onclick = "newNoteIn()" >
                             <img src="/static/note/img/arrow-bar-right.svg" alt="Bootstrap" width="32" height="32">
                         </button> 
                         <input type="text" id="searh_input" class="form-control" placeholder="Searh">
-                        <button type="button" class="btn" title="Rename note" width="32" height="32" onclick = "renameNode()" >
+                        <button type="button" class="btn" title="{% trans 'Rename note' %}" width="32" height="32" onclick = "renameNode()" >
                             <img src="/static/note/img/edit.png" alt="Bootstrap" width="32" height="32" >
                         </button>               
-                        <button type="button" class="btn" title="Delete note" width="32" height="32"  onclick = "deleteNode()" >
+                        <button type="button" class="btn" title="{% trans 'Delete note' %}" width="32" height="32"  onclick = "deleteNode()" >
                             <img src="/static/note/img/del.png" alt="Bootstrap" width="32" height="32">
                         </button>
                     </div>
@@ -33,10 +34,10 @@
             <div class="col-9">
                 <div class="row "  style="background-color: #b9963c;">
                     <div class="input-group mb-3  justify-content-md-end">
-                        <button  id="btnEdit" type="button" class="btn" title="Edit" width="32" height="32" onclick = "enableEdit()" >
+                        <button  id="btnEdit" type="button" class="btn" title="{% trans 'Edit' %}" width="32" height="32" onclick = "enableEdit()" >
                             <img src="/static/note/img/edit_note.png" alt="Bootstrap" width="32" height="32"  fill="currentColor">
                         </button>               
-                        <button id="btnSave" type="button" class="btn" title="Save" width="32" height="32"  onclick = "saveNote()"  disabled>
+                        <button id="btnSave" type="button" class="btn" title="{% trans 'Save' %}" width="32" height="32"  onclick = "saveNote()"  disabled>
                             <img id="imgSave" src="/static/note/img/save.png" alt="Bootstrap" width="32" height="32">
                         </button>                        
                     </div>
@@ -57,7 +58,7 @@
 
 {% block javascript %}
    
-<script  type="text/javascript">
+<script  type="text/javascript"> 
      tinymce.init({
             selector: "#note_text",
             language: "{{LANGUAGE_CODE}}",
