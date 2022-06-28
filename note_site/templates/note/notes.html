@@ -79,10 +79,8 @@
     {% endautoescape %}
     
 
-
     <script type="text/javascript">
         
-
 	   
         $('#jstree').on("changed.jstree", function (e, data) {        
                 if(data.changed.selected.length) {
@@ -94,8 +92,6 @@
                      saveNoteText(data.changed.deselected[0]);
                 }
         });      
-
-        
 
 
         $('#jstree').on("rename_node.jstree", function (e, data) {  
@@ -389,6 +385,5 @@
         });
     </script>
 
-
-    
+   
 {% endblock javascript %}

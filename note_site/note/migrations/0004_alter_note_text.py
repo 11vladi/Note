@@ -7,13 +7,13 @@ import tinymce.models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('note', '0003_note_level_note_parent_id_note_root_id_and_more'),
+        ("note", "0003_note_level_note_parent_id_note_root_id_and_more"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='note',
-            name='text',
+            model_name="note",
+            name="text",
             field=tinymce.models.HTMLField(),
         ),
     ]

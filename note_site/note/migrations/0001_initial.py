@@ -8,25 +8,40 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Note',
+            name="Note",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=200, verbose_name='Name')),
-                ('text', models.TextField()),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=200, verbose_name="Name")),
+                ("text", models.TextField()),
             ],
         ),
         migrations.CreateModel(
-            name='NotesTree',
+            name="NotesTree",
             fields=[
-                ('note', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, primary_key=True, serialize=False, to='note.note')),
-                ('parent_id', models.BigIntegerField(default=-1)),
-                ('root_id', models.BigIntegerField()),
-                ('level', models.IntegerField(default=0)),
+                (
+                    "note",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        primary_key=True,
+                        serialize=False,
+                        to="note.note",
+                    ),
+                ),
+                ("parent_id", models.BigIntegerField(default=-1)),
+                ("root_id", models.BigIntegerField()),
+                ("level", models.IntegerField(default=0)),
             ],
         ),
     ]

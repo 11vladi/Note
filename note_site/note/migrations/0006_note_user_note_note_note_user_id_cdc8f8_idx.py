@@ -9,17 +9,23 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('note', '0005_remove_note_root_id'),
+        ("note", "0005_remove_note_root_id"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='note',
-            name='user',
-            field=models.ForeignKey(default=0, on_delete=django.db.models.deletion.PROTECT, to=settings.AUTH_USER_MODEL),
+            model_name="note",
+            name="user",
+            field=models.ForeignKey(
+                default=0,
+                on_delete=django.db.models.deletion.PROTECT,
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
         migrations.AddIndex(
-            model_name='note',
-            index=models.Index(fields=['user_id', 'level', 'name'], name='note_note_user_id_cdc8f8_idx'),
+            model_name="note",
+            index=models.Index(
+                fields=["user_id", "level", "name"], name="note_note_user_id_cdc8f8_idx"
+            ),
         ),
     ]
